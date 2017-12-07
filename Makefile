@@ -6,7 +6,7 @@
 #    By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/06 12:50:22 by elebouch          #+#    #+#              #
-#    Updated: 2017/12/06 13:41:27 by elebouch         ###   ########.fr        #
+#    Updated: 2017/12/07 12:00:57 by elebouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,14 @@ LIB = ./libft/libft.a
 SRCS =\
 	 ft_printf.c \
 	 ft_args.c \
-	 debugflags.c
+	 debugflags.c \
+	 ft_print.c
 OBJ = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 TEMPNAME = $(addprefix $(OBJDIR), $(NAME))
 
 all: $(NAME)
 
-$(NAME): build $(LIB) $(OBJ)
+$(NAME): build lib $(OBJ)
 	@ar rc $(TEMPNAME) $(OBJ)
 	@libtool -static -o $(NAME) $(TEMPNAME) $(LIB) 
 	@ranlib $(NAME)
@@ -49,5 +50,5 @@ re: fclean all
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) -o $@ -c $< 
 
-$(LIB_DIR)/%.a:
+lib:
 	@make -C $(LIB_DIR)

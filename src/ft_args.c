@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 11:11:43 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/06 14:33:35 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/07 11:41:23 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		ft_proc_arg(char **fmt, va_list ap)
 		if (**fmt)
 		{
 			*fmt = ft_parse_args(&data, fmt);
-			return (debugflags(&data));//(ft_print_args(ap, data, fmt));
+			return (ft_print_args(&data, ap));
 		}
 	}
 	return (0);
@@ -106,7 +106,7 @@ int		ft_print_args(t_prtf *data, va_list ap)
 	else if (data->format == 'd' || data->format == 'i' || data->format == 'o'
 		|| data->format == 'u' || data->format == 'x' || data->format == 'X')
 		return (ft_formatint(data, ap));
-	else if (data->format == 'D' || data->format == 'O' || data->format == 'U')
-		return (ft_formatlong(data, ap));
+	//else if (data->format == 'D' || data->format == 'O' || data->format == 'U')
+	//	return (ft_formatlong(data, ap));
 	return (0);
 }
