@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 13:42:34 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/07 12:08:47 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/12 13:59:47 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 int main (void)
 {
-	int i = 0;
-	ft_printf("%i", i);
+	int i = 12;
+	ft_printf("POUET:%011.10d\n%d", i, i);
+	ft_printf("\n");
+	printf("%011.10d", i);
 }

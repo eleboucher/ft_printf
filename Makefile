@@ -6,7 +6,7 @@
 #    By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/06 12:50:22 by elebouch          #+#    #+#              #
-#    Updated: 2017/12/07 12:00:57 by elebouch         ###   ########.fr        #
+#    Updated: 2017/12/12 13:46:43 by elebouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,11 @@ LIB = ./libft/libft.a
 SRCS =\
 	 ft_printf.c \
 	 ft_args.c \
-	 debugflags.c \
-	 ft_print.c
+	 ft_print.c \
+	 ft_printstr.c \
+     ft_getflags.c \
+	 debugflags.c
+
 OBJ = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 TEMPNAME = $(addprefix $(OBJDIR), $(NAME))
 

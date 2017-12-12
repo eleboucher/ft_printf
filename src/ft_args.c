@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 11:11:43 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/07 11:41:23 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/12 14:26:33 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int		ft_proc_arg(char **fmt, va_list ap)
 {
 	t_prtf			data;
 
-	(void)ap;
 	if (**fmt == '%')
 	{
 		(*fmt)++;
@@ -31,11 +30,9 @@ int		ft_proc_arg(char **fmt, va_list ap)
 
 char	*ft_parse_args(t_prtf *data, char **fmt)
 {
-	data->width = 0;
-	data->precision = 0;
-	if (**fmt == '#' || **fmt == ' ' || **fmt == '0' || **fmt == '+' ||
-			**fmt == '-')
-		data->flags = *(*fmt)++;
+	data->width = -1;
+	data->precision = -1;
+	ft_getflags(fmt, data);
 	if (ft_isdigit(**fmt))
 		data->width = ft_parse_intarg(fmt);
 	if (**fmt == '.')
@@ -61,7 +58,7 @@ int		ft_parse_intarg(char **fmt)
 	{
 		if (!ft_isdigit(**fmt))
 			break ;
-		ret = ret * 10 + *(*fmt)++  - '0';
+		ret = ret * 10 + *(*fmt)++ - '0';
 	}
 	return (ret);
 }
@@ -95,17 +92,16 @@ int		ft_parse_mod(char **fmt)
 int		ft_print_args(t_prtf *data, va_list ap)
 {
 	if (data->format == '%')
-	{
-		ft_putchar(data->format);
-		return (1);
-	}
+		return(ft_printstr(ft_ctos(data->format),data));
 	else if (data->format == 's' || data->format == 'S')
 		return (ft_formatstr(data, ap));
 	else if (data->format == 'c' || data->format == 'C')
 		return (ft_formatchr(data, ap));
-	else if (data->format == 'd' || data->format == 'i' || data->format == 'o'
-		|| data->format == 'u' || data->format == 'x' || data->format == 'X')
+	else if (data->format == 'd' || data->format == 'i')
 		return (ft_formatint(data, ap));
+	else if (data->format == 'o' || data->format == 'u' || data->format == 'x'
+			|| data->format == 'X')
+		return (ft_formatuint(data, ap));
 	//else if (data->format == 'D' || data->format == 'O' || data->format == 'U')
 	//	return (ft_formatlong(data, ap));
 	return (0);
