@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 11:11:43 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/12 14:26:33 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/12 15:02:52 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ char	*ft_parse_args(t_prtf *data, char **fmt)
 		(*fmt)++;
 		data->precision = ft_parse_intarg(fmt);
 	}
-	data->modifier = ft_parse_mod(fmt);
+	while (**fmt && (**fmt == 'l' || **fmt == 'h' || **fmt == 'j' 
+				|| **fmt == 'z'))
+		data->modifier = ft_parse_mod(fmt);
 	while (ft_isspace(**fmt))
 		(*fmt)++;
 	data->format = **fmt;
@@ -84,7 +86,7 @@ int		ft_parse_mod(char **fmt)
 		ret = md_j;
 	if (**fmt == 'z')
 		ret = md_z;
-	if (ret != none && **fmt)
+	if (**fmt)
 		(*fmt)++;
 	return (ret);
 }
