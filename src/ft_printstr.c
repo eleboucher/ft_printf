@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 10:36:35 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/14 14:39:50 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/14 17:14:03 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		ft_printstr(char *str, t_prtf *data)
 {
-	int len;	
+	int len;
 
-	if (data->fg_hashtag)
+	if (data->fg_hashtag && !data->fg_zero)
 	{
 		if (data->format == 'x')
 			str = ft_strjoin("0x", str);
@@ -25,13 +25,18 @@ int		ft_printstr(char *str, t_prtf *data)
 		else if (data->format == 'o')
 			data->precision += 1;
 	}
+	if (data->fg_space && !data->fg_plus && (data->format == 'd' ||
+				data->format == 'i'))
+		str = ft_strjoin(" ", str);
+	if (data->fg_plus && !ft_strchr(str, '-'))
+		str = ft_strjoin("+", str);
 	if (data->width >= 0)
 		str = ft_width(str, data);
 	if (data->precision >= 0)
 		str = ft_precision(str, data);
 	len = -1;
 	while (str[++len])
-		write (1, &str[len], 1);
+		write(1, &str[len], 1);
 	return (len);
 }
 
@@ -39,10 +44,11 @@ char	*ft_precision(char *str, t_prtf *data)
 {
 	int		len;
 	char	*s;
+
 	s = str;
 	if (data->format == 's')
 	{
-		s = ft_strsub(s, 0 , data->precision);
+		s = ft_strsub(s, 0, data->precision);
 		return (s);
 	}
 	len = ft_strlen(s);
@@ -50,7 +56,7 @@ char	*ft_precision(char *str, t_prtf *data)
 	return (s);
 }
 
-char *ft_width(char *str, t_prtf *data)
+char	*ft_width(char *str, t_prtf *data)
 {
 	int		len;
 	char	*s;
@@ -69,7 +75,7 @@ char *ft_width(char *str, t_prtf *data)
 	return (s);
 }
 
-char *ft_fillwithsep(char *str, int precision, char sep, int start)
+char	*ft_fillwithsep(char *str, int precision, char sep, int start)
 {
 	char	*new;
 	int		i;

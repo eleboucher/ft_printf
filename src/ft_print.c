@@ -6,12 +6,11 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 11:20:58 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/14 13:47:59 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/14 16:37:22 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int		ft_formatstr(t_prtf *data, va_list ap)
 {
@@ -41,21 +40,20 @@ int		ft_formatint(t_prtf *data, va_list ap)
 {
 	long long int i;
 
-
 	if (data->modifier == md_h)
-		i = (short) va_arg(ap, long long int);
+		i = (short)va_arg(ap, long long int);
 	else if (data->modifier == md_db_h)
-		i = (signed char) va_arg(ap, long long int);
+		i = (signed char)va_arg(ap, long long int);
 	else if (data->modifier == md_l)
-		i = (long) va_arg(ap, long long int);
+		i = (long)va_arg(ap, long long int);
 	else if (data->modifier == md_db_l)
-		i = (long long) va_arg(ap, long long int);
+		i = (long long)va_arg(ap, long long int);
 	else if (data->modifier == md_j)
-		i = (intmax_t) va_arg(ap, long long int);
+		i = (intmax_t)va_arg(ap, long long int);
 	else if (data->modifier == md_z)
-		i = (size_t) va_arg(ap, long long int);
-	else 
-		i = (int) va_arg(ap, long long int);
+		i = (size_t)va_arg(ap, long long int);
+	else
+		i = (int)va_arg(ap, long long int);
 	return (ft_printstr(ft_lltoa_base(i, 10), data));
 }
 
@@ -82,6 +80,21 @@ int		ft_formatuint(t_prtf *data, va_list ap)
 	if (data->format == 'X')
 		return (ft_printstr(ft_lltoa_base(i, 16), data));
 	if (data->format == 'o')
+		return (ft_printstr(ft_lltoa_base(i, 8), data));
+	return (ft_printstr(ft_lltoa_base(i, 10), data));
+}
+
+int		ft_formatlong(t_prtf *data, va_list ap)
+{
+	long long int i;
+
+	if (data->format == 'D')
+	{
+		i = va_arg(ap, long int);
+		return (ft_printstr(ft_lltoa_base(i, 10), data));
+	}
+	i = (unsigned long int)va_arg(ap, long int);
+	if (data->format == 'O')
 		return (ft_printstr(ft_lltoa_base(i, 8), data));
 	return (ft_printstr(ft_lltoa_base(i, 10), data));
 }

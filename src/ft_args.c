@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 11:11:43 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/14 13:47:19 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/14 16:35:26 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_parse_args(t_prtf *data, char **fmt)
 		(*fmt)++;
 		data->precision = ft_parse_intarg(fmt);
 	}
-	while (**fmt && (**fmt == 'l' || **fmt == 'h' || **fmt == 'j' 
+	while (**fmt && (**fmt == 'l' || **fmt == 'h' || **fmt == 'j'
 				|| **fmt == 'z'))
 		data->modifier = ft_parse_mod(fmt);
 	while (ft_isspace(**fmt))
@@ -94,7 +94,7 @@ int		ft_parse_mod(char **fmt)
 int		ft_print_args(t_prtf *data, va_list ap)
 {
 	if (data->format == '%')
-		return(ft_printstr(ft_ctos(data->format),data));
+		return (ft_printstr(ft_ctos(data->format), data));
 	else if (data->format == 's' || data->format == 'S')
 		return (ft_formatstr(data, ap));
 	else if (data->format == 'c' || data->format == 'C')
@@ -104,7 +104,7 @@ int		ft_print_args(t_prtf *data, va_list ap)
 	else if (data->format == 'o' || data->format == 'u' || data->format == 'x'
 			|| data->format == 'X')
 		return (ft_formatuint(data, ap));
-	//else if (data->format == 'D' || data->format == 'O' || data->format == 'U')
-	//	return (ft_formatlong(data, ap));
-	return (ft_printstr(ft_ctos(data->format),data));
+	else if (data->format == 'D' || data->format == 'O' || data->format == 'U')
+		return (ft_formatlong(data, ap));
+	return (ft_printstr(ft_ctos(data->format), data));
 }
