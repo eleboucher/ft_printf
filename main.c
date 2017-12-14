@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 13:42:34 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/12 15:31:53 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/14 14:39:29 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 int main (void)
 {
 	int i = 12;
-	ft_printf("%lx", 4294967296);
-	ft_printf("\n");
-	printf("%lx", 4294967296);
+	ft_printf("pouet %-10X\n", i);
+	printf("pouet %-10X\n", i);
 }

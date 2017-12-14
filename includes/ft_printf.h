@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 11:04:13 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/12 13:50:29 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/14 13:16:00 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 #include <stdarg.h>
 #include "libft.h"
+
+/*
+ ** TEMP
+ */
+#include <stdio.h>
 
 typedef struct		s_prtf
 {
@@ -56,5 +61,5 @@ int		ft_formatlong(t_prtf *data, va_list ap);
 int		ft_printstr(char *str, t_prtf *data);
 char	*ft_precision(char *s, t_prtf *data);
 char	*ft_width(char *s, t_prtf *data);
-char	*ft_fillwithsep(char *str, int precision, char sep);
+char	*ft_fillwithsep(char *str, int precision, char sep, int start);
 #endif

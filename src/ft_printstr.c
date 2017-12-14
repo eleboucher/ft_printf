@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 10:36:35 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/12 15:23:06 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/14 14:39:50 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@ int		ft_printstr(char *str, t_prtf *data)
 {
 	int len;	
 
+	if (data->fg_hashtag)
+	{
+		if (data->format == 'x')
+			str = ft_strjoin("0x", str);
+		else if (data->format == 'X')
+			str = ft_strjoin("0X", str);
+		else if (data->format == 'o')
+			data->precision += 1;
+	}
 	if (data->width >= 0)
 		str = ft_width(str, data);
 	if (data->precision >= 0)
@@ -37,7 +46,7 @@ char	*ft_precision(char *str, t_prtf *data)
 		return (s);
 	}
 	len = ft_strlen(s);
-	s = ft_fillwithsep(s, data->precision, '0');
+	s = ft_fillwithsep(s, data->precision, '0', 0);
 	return (s);
 }
 
@@ -50,25 +59,31 @@ char *ft_width(char *str, t_prtf *data)
 	len = ft_strlen(s);
 	if (data->width >= len)
 	{
-		if (data->fg_zero && data->precision == -1)
-			s = ft_fillwithsep(s, data->width, '0');
+		if (data->fg_zero && data->precision == -1 && !data->fg_minus)
+			s = ft_fillwithsep(s, data->width, '0', 0);
+		else if (data->fg_minus)
+			s = ft_fillwithsep(s, data->width, ' ', len);
 		else
-			s = ft_fillwithsep(s, data->width, ' ');
+			s = ft_fillwithsep(s, data->width, ' ', 0);
 	}
 	return (s);
 }
 
-char *ft_fillwithsep(char *str, int precision, char sep)
+char *ft_fillwithsep(char *str, int precision, char sep, int start)
 {
 	char	*new;
 	int		i;
+	int		j;
 
 	precision -= ft_strlen(str);
 	if (!(new = ft_strnew(ft_strlen(str) + precision)))
 		return (NULL);
-	i = -1;
-	while (++i < precision)
-		new[i] = sep;
-	ft_strcat(new, str);
+	j = -1;
+	while (++j < (int)ft_strlen(str) + precision)
+		new[j] = sep;
+	j = -1;
+	i = (!start) ? precision : 0;
+	while (++j < (int)ft_strlen(str))
+		new[i++] = str[j];
 	return (new);
 }

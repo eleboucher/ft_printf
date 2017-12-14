@@ -6,7 +6,7 @@
 #    By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/06 12:50:22 by elebouch          #+#    #+#              #
-#    Updated: 2017/12/14 11:59:49 by elebouch         ###   ########.fr        #
+#    Updated: 2017/12/14 13:42:28 by elebouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,3 +130,4 @@ re: fclean all
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) -o $@ -c $< 
 
+.PHONY: all re clean fclean build
