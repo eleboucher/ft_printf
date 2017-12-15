@@ -6,7 +6,7 @@
 #    By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/06 12:50:22 by elebouch          #+#    #+#              #
-#    Updated: 2017/12/14 13:42:28 by elebouch         ###   ########.fr        #
+#    Updated: 2017/12/15 14:01:00 by elebouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,7 +125,9 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 
-re: fclean all
+re: 
+	@make fclean 
+	@make
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) -o $@ -c $< 
