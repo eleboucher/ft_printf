@@ -6,7 +6,7 @@
 #    By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/06 12:50:22 by elebouch          #+#    #+#              #
-#    Updated: 2017/12/15 14:01:00 by elebouch         ###   ########.fr        #
+#    Updated: 2017/12/15 14:06:44 by elebouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,15 +109,11 @@ LIBFT_SRCS= \
 LIBFT_SRC = $(addprefix $(SRC_DIR)$(LIB_DIR), $(LIBFT_SRC))
 OBJ = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o)) $(addprefix $(OBJ_DIR)$(LIB_DIR), $(LIBFT_SRCS:.c=.o))
 
-all: $(NAME)
+all:  $(NAME)
 
-$(NAME): build $(OBJ)
+$(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-
-build:
-	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(OBJ_DIR)/libft
 
 clean:
 	@rm -rf $(OBJ)
@@ -130,6 +126,8 @@ re:
 	@make
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/libft
 	@$(CC) $(CFLAGS) -o $@ -c $< 
 
 .PHONY: all re clean fclean build

@@ -6,16 +6,18 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 13:42:34 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/14 14:39:29 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/15 14:17:40 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-int main (void)
+int	main(void)
 {
-	int i = 12;
+	int i;
+
+	i = 12;
 	ft_printf("pouet %-10X\n", i);
 	printf("pouet %-10X\n", i);
 }
