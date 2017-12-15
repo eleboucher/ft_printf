@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 10:36:35 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/14 17:14:03 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/15 16:49:08 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_printstr(char *str, t_prtf *data)
 			data->precision += 1;
 	}
 	if (data->fg_space && !data->fg_plus && (data->format == 'd' ||
-				data->format == 'i'))
+				data->format == 'i') && !ft_strchr(str,'-'))
 		str = ft_strjoin(" ", str);
 	if (data->fg_plus && !ft_strchr(str, '-'))
 		str = ft_strjoin("+", str);
@@ -65,7 +65,7 @@ char	*ft_width(char *str, t_prtf *data)
 	len = ft_strlen(s);
 	if (data->width >= len)
 	{
-		if (data->fg_zero && data->precision == -1 && !data->fg_minus)
+		if (data->fg_zero && !data->fg_minus)
 			s = ft_fillwithsep(s, data->width, '0', 0);
 		else if (data->fg_minus)
 			s = ft_fillwithsep(s, data->width, ' ', len);
