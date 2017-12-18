@@ -6,7 +6,7 @@
 #    By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/06 12:50:22 by elebouch          #+#    #+#              #
-#    Updated: 2017/12/15 14:06:44 by elebouch         ###   ########.fr        #
+#    Updated: 2017/12/18 14:29:38 by elebouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,10 @@ LIBFT_SRCS= \
 		ft_strtolower.c		\
 		ft_lltoa_base.c		\
 		ft_ctos.c 			\
-		ft_putnstr.c
+		ft_putnstr.c		\
+		ft_max.c			\
+		ft_min.c			\
+		ft_strset.c
 
 LIBFT_SRC = $(addprefix $(SRC_DIR)$(LIB_DIR), $(LIBFT_SRC))
 OBJ = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o)) $(addprefix $(OBJ_DIR)$(LIB_DIR), $(LIBFT_SRCS:.c=.o))

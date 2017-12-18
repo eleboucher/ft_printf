@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 11:11:43 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/14 16:35:26 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/18 11:23:32 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	*ft_parse_args(t_prtf *data, char **fmt)
 {
 	data->width = -1;
 	data->precision = -1;
+	data->neg = 0;
 	ft_getflags(fmt, data);
 	if (ft_isdigit(**fmt))
 		data->width = ft_parse_intarg(fmt);

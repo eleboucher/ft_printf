@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/06 13:42:34 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/18 14:11:58 by elebouch         ###   ########.fr       */
+/*   Created: 2017/12/18 11:09:37 by elebouch          #+#    #+#             */
+/*   Updated: 2017/12/18 11:16:44 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+void	ft_strset(char *str, char c, size_t start, size_t end)
 {
-	int i;
-
-	i = 12;
-	ft_printf("%d", -2147483648);
+	while (start < end)
+	{
+		str[start] = c;
+		start++;
+	}
 }

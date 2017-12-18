@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 11:20:58 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/14 16:37:22 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/18 14:30:26 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,22 @@ int		ft_formatstr(t_prtf *data, va_list ap)
 
 int		ft_formatchr(t_prtf *data, va_list ap)
 {
-	char c;
+	char	c;
+	int		len;
 
-	(void)data;
+	len = 0;
 	c = va_arg(ap, int);
-	write(1, &c, 1);
-	return (1);
+	if (data->fg_minus)
+	{
+		len += write(1, &c, 1);
+		len += ft_width(1, data);
+	}
+	else
+	{
+		len += ft_width(1, data);
+		len += write(1, &c, 1);
+	}
+	return (len);
 }
 
 int		ft_formatint(t_prtf *data, va_list ap)
@@ -54,6 +64,11 @@ int		ft_formatint(t_prtf *data, va_list ap)
 		i = (size_t)va_arg(ap, long long int);
 	else
 		i = (int)va_arg(ap, long long int);
+	if (i < 0)
+	{
+		data->neg = 1;
+		i *= -1;
+	}
 	return (ft_printstr(ft_lltoa_base(i, 10), data));
 }
 
@@ -96,5 +111,7 @@ int		ft_formatlong(t_prtf *data, va_list ap)
 	i = (unsigned long int)va_arg(ap, long int);
 	if (data->format == 'O')
 		return (ft_printstr(ft_lltoa_base(i, 8), data));
-	return (ft_printstr(ft_lltoa_base(i, 10), data));
+	if (i < 0)
+		data->neg = 1;
+	return (ft_printstr(ft_lltoa_base(ft_abs(i), 10), data));
 }

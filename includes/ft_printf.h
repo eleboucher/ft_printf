@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 11:04:13 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/14 17:44:23 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/18 13:41:49 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct	s_prtf
 	int			fg_minus;
 	int			fg_space;
 	int			fg_plus;
+	int			neg;
 }				t_prtf;
 
 enum			e_modifier {
@@ -56,6 +57,7 @@ int				ft_formatuint(t_prtf *data, va_list ap);
 int				ft_formatlong(t_prtf *data, va_list ap);
 int				ft_printstr(char *str, t_prtf *data);
 char			*ft_precision(char *s, t_prtf *data);
-char			*ft_width(char *s, t_prtf *data);
-char			*ft_fillwithsep(char *str, int precision, char sep, int start);
+int				ft_width(size_t len, t_prtf *data);
+int				ft_getwidthsize(int len, t_prtf *data);
+int				ft_prefix(t_prtf *data);
 #endif
