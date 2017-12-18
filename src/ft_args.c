@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 11:11:43 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/18 17:37:39 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/18 18:20:53 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		ft_parse_mod(char **fmt)
 	}
 	if (**fmt == 'h')
 	{
-		ret = md_l;
+		ret = md_h;
 		if (*(*fmt)++ && **fmt == 'h')
 			ret = md_db_h;
 	}
