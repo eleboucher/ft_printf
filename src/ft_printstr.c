@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 10:36:35 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/18 14:31:53 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/18 15:04:00 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ int		ft_printstr(char *str, t_prtf *data)
 	str = (data->precision == -1) ? str : ft_precision(str, data);
 	if (data->fg_zero && !data->fg_minus)
 	{
-		size += ft_prefix(data);
+		size += ft_prefix(str, data);
 		size += ft_width(ft_strlen(str), data);
 		size += write(1, str, ft_strlen(str));
 	}
 	else if (data->fg_minus)
 	{
-		size += ft_prefix(data);
+		size += ft_prefix(str, data);
 		size += write(1, str, ft_strlen(str));
 		size += ft_width(ft_strlen(str), data);
 	}
 	else
 	{
 		size += ft_width(ft_strlen(str), data);
-		size += ft_prefix(data);
+		size += ft_prefix(str, data);
 		size += write(1, str, ft_strlen(str));
 	}
 	return (size);
@@ -44,11 +44,10 @@ char	*ft_precision(char *str, t_prtf *data)
 	int		len;
 	char	*s;
 
-	s = str;
 	len = ft_max(data->precision, ft_strlen(str)) - ft_strlen(str);
 	if (data->format == 'o' && data->fg_hashtag && data->precision > 0)
 		len -= 1;
-	if (!len && str[0] == '0' && data->precision > -1)
+	if (!len && str[0] == '0')
 	{
 		free(str);
 		s = ft_strnew(0);
@@ -56,7 +55,7 @@ char	*ft_precision(char *str, t_prtf *data)
 	}
 	if (data->format == 's')
 	{
-		s = ft_strsub(s, 0, data->precision);
+		s = ft_strsub(str, 0, data->precision);
 		return (s);
 	}
 	s = ft_strnew(data->precision);
@@ -92,22 +91,24 @@ int		ft_width(size_t len, t_prtf *data)
 	return (size);
 }
 
-int		ft_prefix(t_prtf *data)
+int		ft_prefix(char *str, t_prtf *data)
 {
 	int size;
 
 	size = 0;
 	if ((data->format == 'o' || data->format == 'O') && data->fg_hashtag)
 		size += write(1, "0", 1);
-	if (data->format == 'p' || (data->format == 'x' && data->fg_hashtag))
+	else if (data->format == 'p' || (data->format == 'x' && data->fg_hashtag &&
+				(*str && str[0] != '0')))
 		size += write(1, "0x", 2);
-	if (data->format == 'X' && data->fg_hashtag)
+	else if (data->format == 'X' && data->fg_hashtag && (*str && str[0] != '0'))
 		size += write(1, "0X", 2);
-	if (data->neg)
+	else if (data->neg)
 		size += write(1, "-", 1);
-	if (!data->neg && data->fg_plus)
+	else if (!data->neg && data->fg_plus)
 		size += write(1, "+", 1);
-	if (!data->neg && !data->fg_plus && data->fg_space && data->format != '%')
+	else if (!data->neg && !data->fg_plus && data->fg_space &&
+			data->format != '%')
 		size += write(1, " ", 1);
 	return (size);
 }

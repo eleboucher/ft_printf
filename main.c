@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 13:42:34 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/18 14:11:58 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/18 14:53:08 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ int	main(void)
 	int i;
 
 	i = 12;
-	ft_printf("%d", -2147483648);
+	ft_printf("@moulitest: %#.x %#.0x\n", 0, 0);
+	printf("@moulitest: %#.x %#.0x", 0, 0);
 }
