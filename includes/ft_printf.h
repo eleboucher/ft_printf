@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 11:04:13 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/18 14:44:55 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/18 17:33:42 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ char			*ft_precision(char *s, t_prtf *data);
 int				ft_width(size_t len, t_prtf *data);
 int				ft_getwidthsize(int len, t_prtf *data);
 int				ft_prefix(char *str, t_prtf *data);
+void			ft_initialize(t_prtf *data);
 #endif

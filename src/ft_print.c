@@ -6,20 +6,23 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 11:20:58 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/18 14:30:26 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/18 18:10:44 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 int		ft_formatstr(t_prtf *data, va_list ap)
 {
-	char *s;
+	char	*s;
 
 	s = va_arg(ap, char *);
+	data->fg_space = 0;
+	data->fg_plus = 0;
 	if (!s)
 		return (ft_printstr("(null)", data));
-	if (data->format == 'S' || (data->format == 's' && data->modifier == md_l))
+	if (data->format == 'S')
 		return (ft_printstr(s, data));
 	if (data->format == 's')
 		return (ft_printstr(s, data));
@@ -48,20 +51,20 @@ int		ft_formatchr(t_prtf *data, va_list ap)
 
 int		ft_formatint(t_prtf *data, va_list ap)
 {
-	long long int i;
+	long long i;
 
 	if (data->modifier == md_h)
-		i = (short)va_arg(ap, long long int);
+		i = (short)va_arg(ap, int);
 	else if (data->modifier == md_db_h)
-		i = (signed char)va_arg(ap, long long int);
+		i = (signed char)va_arg(ap, long long);
 	else if (data->modifier == md_l)
-		i = (long)va_arg(ap, long long int);
+		i = (long)va_arg(ap, long long);
 	else if (data->modifier == md_db_l)
-		i = (long long)va_arg(ap, long long int);
+		i = (long long)va_arg(ap, long long);
 	else if (data->modifier == md_j)
-		i = (intmax_t)va_arg(ap, long long int);
+		i = (intmax_t)va_arg(ap, long long);
 	else if (data->modifier == md_z)
-		i = (size_t)va_arg(ap, long long int);
+		i = (size_t)va_arg(ap, long long);
 	else
 		i = (int)va_arg(ap, long long int);
 	if (i < 0)
@@ -74,12 +77,12 @@ int		ft_formatint(t_prtf *data, va_list ap)
 
 int		ft_formatuint(t_prtf *data, va_list ap)
 {
-	unsigned long long int i;
+	unsigned long long i;
 
 	if (data->modifier == md_db_h)
 		i = (unsigned char)va_arg(ap, unsigned long long int);
 	else if (data->modifier == md_h)
-		i = (unsigned short)va_arg(ap, unsigned long long int);
+		i = (unsigned short int)va_arg(ap, unsigned long long int);
 	else if (data->modifier == md_l)
 		i = (unsigned long)va_arg(ap, unsigned long long int);
 	else if (data->modifier == md_db_l)
@@ -90,6 +93,8 @@ int		ft_formatuint(t_prtf *data, va_list ap)
 		i = (size_t)va_arg(ap, unsigned long long int);
 	else
 		i = (unsigned int)va_arg(ap, unsigned long long int);
+	data->fg_space = 0;
+	data->fg_plus = 0;
 	if (data->format == 'x')
 		return (ft_printstr(ft_strtolower(ft_lltoa_base(i, 16)), data));
 	if (data->format == 'X')
@@ -101,17 +106,27 @@ int		ft_formatuint(t_prtf *data, va_list ap)
 
 int		ft_formatlong(t_prtf *data, va_list ap)
 {
-	long long int i;
+	long long i;
 
 	if (data->format == 'D')
 	{
 		i = va_arg(ap, long int);
+		if (i < 0)
+		{
+			data->neg = 1;
+			i *= -1;
+		}
 		return (ft_printstr(ft_lltoa_base(i, 10), data));
 	}
 	i = (unsigned long int)va_arg(ap, long int);
+	data->fg_space = 0;
+	data->fg_plus = 0;
+	if (i < 0)
+	{
+		data->neg = 1;
+		i *= -1;
+	}
 	if (data->format == 'O')
 		return (ft_printstr(ft_lltoa_base(i, 8), data));
-	if (i < 0)
-		data->neg = 1;
-	return (ft_printstr(ft_lltoa_base(ft_abs(i), 10), data));
+	return (ft_printstr(ft_lltoa_base(i, 10), data));
 }

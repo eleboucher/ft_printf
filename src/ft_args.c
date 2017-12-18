@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 11:11:43 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/18 11:23:32 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/18 17:37:39 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ int		ft_proc_arg(char **fmt, va_list ap)
 
 char	*ft_parse_args(t_prtf *data, char **fmt)
 {
+	ft_initialize(data);
 	data->width = -1;
-	data->precision = -1;
-	data->neg = 0;
 	ft_getflags(fmt, data);
 	if (ft_isdigit(**fmt))
 		data->width = ft_parse_intarg(fmt);
@@ -41,9 +40,7 @@ char	*ft_parse_args(t_prtf *data, char **fmt)
 		(*fmt)++;
 		data->precision = ft_parse_intarg(fmt);
 	}
-	while (**fmt && (**fmt == 'l' || **fmt == 'h' || **fmt == 'j'
-				|| **fmt == 'z'))
-		data->modifier = ft_parse_mod(fmt);
+	data->modifier = ft_parse_mod(fmt);
 	while (ft_isspace(**fmt))
 		(*fmt)++;
 	data->format = **fmt;
@@ -87,16 +84,14 @@ int		ft_parse_mod(char **fmt)
 		ret = md_j;
 	if (**fmt == 'z')
 		ret = md_z;
-	if (**fmt)
+	if (*fmt && ret != none && ret != md_l && ret != md_h)
 		(*fmt)++;
 	return (ret);
 }
 
 int		ft_print_args(t_prtf *data, va_list ap)
 {
-	if (data->format == '%')
-		return (ft_printstr(ft_ctos(data->format), data));
-	else if (data->format == 's' || data->format == 'S')
+	if (data->format == 's' || data->format == 'S')
 		return (ft_formatstr(data, ap));
 	else if (data->format == 'c' || data->format == 'C')
 		return (ft_formatchr(data, ap));
@@ -107,5 +102,6 @@ int		ft_print_args(t_prtf *data, va_list ap)
 		return (ft_formatuint(data, ap));
 	else if (data->format == 'D' || data->format == 'O' || data->format == 'U')
 		return (ft_formatlong(data, ap));
+	ft_initialize(data);
 	return (ft_printstr(ft_ctos(data->format), data));
 }

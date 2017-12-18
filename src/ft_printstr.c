@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 10:36:35 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/18 15:04:00 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/18 18:12:40 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int		ft_printstr(char *str, t_prtf *data)
 		size += ft_prefix(str, data);
 		size += write(1, str, ft_strlen(str));
 	}
+	if (data->format != 's')
+		free(str);
 	return (size);
 }
 
@@ -47,7 +49,7 @@ char	*ft_precision(char *str, t_prtf *data)
 	len = ft_max(data->precision, ft_strlen(str)) - ft_strlen(str);
 	if (data->format == 'o' && data->fg_hashtag && data->precision > 0)
 		len -= 1;
-	if (!len && str[0] == '0')
+	if (len <= 0 && str[0] == '0')
 	{
 		free(str);
 		s = ft_strnew(0);
@@ -96,18 +98,19 @@ int		ft_prefix(char *str, t_prtf *data)
 	int size;
 
 	size = 0;
-	if ((data->format == 'o' || data->format == 'O') && data->fg_hashtag)
+	if ((data->format == 'o' || data->format == 'O') && data->fg_hashtag &&
+			str[0] != '0')
 		size += write(1, "0", 1);
-	else if (data->format == 'p' || (data->format == 'x' && data->fg_hashtag &&
+	if (data->format == 'p' || (data->format == 'x' && data->fg_hashtag &&
 				(*str && str[0] != '0')))
 		size += write(1, "0x", 2);
-	else if (data->format == 'X' && data->fg_hashtag && (*str && str[0] != '0'))
+	if (data->format == 'X' && data->fg_hashtag && (*str && str[0] != '0'))
 		size += write(1, "0X", 2);
-	else if (data->neg)
+	if (data->neg)
 		size += write(1, "-", 1);
-	else if (!data->neg && data->fg_plus)
+	if (!data->neg && data->fg_plus)
 		size += write(1, "+", 1);
-	else if (!data->neg && !data->fg_plus && data->fg_space &&
+	if (!data->neg && !data->fg_plus && data->fg_space &&
 			data->format != '%')
 		size += write(1, " ", 1);
 	return (size);
@@ -117,11 +120,11 @@ int		ft_getwidthsize(int len, t_prtf *data)
 {
 	if ((data->format == 'o' || data->format == 'O') && data->fg_hashtag)
 		len -= 1;
-	else if (data->format == 'p' || (data->format == 'x' && data->fg_hashtag))
+	if (data->format == 'p' || (data->format == 'x' && data->fg_hashtag))
 		len -= 2;
-	else if (data->format == 'X' && data->fg_hashtag)
+	if (data->format == 'X' && data->fg_hashtag)
 		len -= 2;
-	else if (data->neg || (!data->neg && data->fg_plus) || (!data->neg &&
+	if (data->neg || (!data->neg && data->fg_plus) || (!data->neg &&
 				!data->fg_plus && data->fg_space && data->format != '%'))
 		len -= 1;
 	return (len);

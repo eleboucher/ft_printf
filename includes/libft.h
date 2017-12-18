@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 19:14:15 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/18 14:29:43 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/18 18:16:10 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int					ft_sqrt(int nb);
 int					ft_abs(int i);
 char				*ft_itoa_base(int n, int base);
 char				*ft_strtolower(char *str);
-char				*ft_lltoa_base(long long n, int base);
+char				*ft_lltoa_base(unsigned long long n, int base);
 char				*ft_ctos(int c);
 char				*ft_strcleanjoin(char *s1, const char *s2);
 void				ft_putnstr(const char *s, size_t len);
