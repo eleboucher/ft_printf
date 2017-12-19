@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 10:36:35 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/18 18:21:08 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/19 11:35:44 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int		ft_printstr(char *str, t_prtf *data)
 		size += ft_prefix(str, data);
 		size += write(1, str, ft_strlen(str));
 	}
-	if (data->format != 's')
-		free(str);
+	free(str);
 	return (size);
 }
 
@@ -62,10 +61,8 @@ char	*ft_precision(char *str, t_prtf *data)
 	}
 	s = ft_strnew(data->precision);
 	ft_strset(s, '0', 0, len);
-	s += len;
-	s = ft_strcpy(s, str);
+	s = ft_strcat(s, str);
 	free(str);
-	s -= len;
 	return (s);
 }
 

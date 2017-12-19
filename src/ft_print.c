@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 11:20:58 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/18 18:10:44 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/19 11:12:46 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int		ft_formatstr(t_prtf *data, va_list ap)
 	data->fg_space = 0;
 	data->fg_plus = 0;
 	if (!s)
-		return (ft_printstr("(null)", data));
+		s = ft_strdup("(null)");
+	else
+		s = ft_strdup(s);
 	if (data->format == 'S')
 		return (ft_printstr(s, data));
 	if (data->format == 's')
