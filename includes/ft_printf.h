@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 11:04:13 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/18 17:33:42 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/19 12:06:26 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ enum			e_modifier {
 	md_z
 };
 
-int				debugflags(t_prtf *data);
 char			*ft_parse_args(t_prtf *data, char **fmt);
 int				ft_parse_intarg(char **fmt);
 int				ft_parse_mod(char **fmt);

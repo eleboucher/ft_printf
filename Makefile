@@ -6,7 +6,7 @@
 #    By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/06 12:50:22 by elebouch          #+#    #+#              #
-#    Updated: 2017/12/18 14:29:38 by elebouch         ###   ########.fr        #
+#    Updated: 2017/12/19 12:06:04 by elebouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,7 @@ SRCS =\
 	 ft_args.c \
 	 ft_print.c \
 	 ft_printstr.c \
-     ft_getflags.c \
-	 debugflags.c
+     ft_getflags.c 
 
 LIBFT_SRCS= \
    		ft_atoi.c			\
