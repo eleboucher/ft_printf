@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_wcslen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/06 13:42:34 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/23 14:24:50 by elebouch         ###   ########.fr       */
+/*   Created: 2017/12/23 13:57:17 by elebouch          #+#    #+#             */
+/*   Updated: 2017/12/23 13:57:38 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+int	ft_wcslen(wchar_t *s)
 {
-	int i = 42;
-	char *str = "coucou";
-	ft_printf("%C", 0x6f);
-//	printf("%C", 0x6f);
+	int size;
+	int sizec;
+
+	size = 0;
+	while (s)
+		if ((sizec = ft_wclen(*s++)) == -1)
+			return (-1);
+		else
+			size += sizec;
+	return (size);
 }

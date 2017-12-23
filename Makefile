@@ -6,7 +6,7 @@
 #    By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/06 12:50:22 by elebouch          #+#    #+#              #
-#    Updated: 2017/12/19 12:06:04 by elebouch         ###   ########.fr        #
+#    Updated: 2017/12/23 14:10:45 by elebouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS =\
 	 ft_args.c \
 	 ft_print.c \
 	 ft_printstr.c \
-     ft_getflags.c 
+     ft_getflags.c \
+	 ft_printunicode.c
 
 LIBFT_SRCS= \
    		ft_atoi.c			\
@@ -108,8 +109,13 @@ LIBFT_SRCS= \
 		ft_min.c			\
 		ft_strset.c
 
+UNICODE = \
+		  ft_wclen.c \
+		  ft_wcslen.c \
+		  ft_putwc.c
+
 LIBFT_SRC = $(addprefix $(SRC_DIR)$(LIB_DIR), $(LIBFT_SRC))
-OBJ = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o)) $(addprefix $(OBJ_DIR)$(LIB_DIR), $(LIBFT_SRCS:.c=.o))
+OBJ = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o)) $(addprefix $(OBJ_DIR)$(LIB_DIR), $(LIBFT_SRCS:.c=.o)) $(addprefix $(OBJ_DIR)unicode/, $(UNICODE:.c=.o))
 
 all:  $(NAME)
 
@@ -130,6 +136,7 @@ re:
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)/libft
+	@mkdir -p $(OBJ_DIR)/unicode
 	@$(CC) $(CFLAGS) -o $@ -c $< 
 
 .PHONY: all re clean fclean build

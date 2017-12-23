@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 11:20:58 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/19 11:12:46 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/23 14:17:41 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		ft_formatstr(t_prtf *data, va_list ap)
 {
 	char	*s;
 
+	if (data->format == 'S' || (data->format == 's' && data->modifier == md_l))
+		return (ft_formatbigs(data, ap));
 	s = va_arg(ap, char *);
 	data->fg_space = 0;
 	data->fg_plus = 0;
@@ -24,8 +26,6 @@ int		ft_formatstr(t_prtf *data, va_list ap)
 		s = ft_strdup("(null)");
 	else
 		s = ft_strdup(s);
-	if (data->format == 'S')
-		return (ft_printstr(s, data));
 	if (data->format == 's')
 		return (ft_printstr(s, data));
 	return (0);
@@ -38,6 +38,8 @@ int		ft_formatchr(t_prtf *data, va_list ap)
 
 	len = 0;
 	c = va_arg(ap, int);
+	if (data->format == 'C' || (data->format == 'c' && data->modifier == md_l))
+		return (ft_formatbigc(data, ap));
 	if (data->fg_minus)
 	{
 		len += write(1, &c, 1);

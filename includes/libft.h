@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 19:14:15 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/18 18:16:10 by elebouch         ###   ########.fr       */
+/*   Updated: 2017/12/23 14:27:43 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-
+# include <wchar.h>
 typedef struct		s_list
 {
 	void			*content;
@@ -120,4 +120,7 @@ void				ft_putnstr(const char *s, size_t len);
 void				ft_strset(char *str, char c, size_t start, size_t end);
 int					ft_max(int a, int b);
 int					ft_min(int a, int b);
+int					ft_wcslen(wchar_t *s);
+int					ft_wclen(wchar_t c);
+int					ft_putwc(wchar_t c);
 #endif
