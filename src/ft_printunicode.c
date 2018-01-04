@@ -6,54 +6,53 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 13:31:26 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/23 14:24:30 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/04 17:27:35 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-
 int 	ft_formatbigc(t_prtf *data, va_list ap)
 {
 	wint_t	c;
 	int		len;
+	int		size;
 
 	len = 0;
-	c = va_arg(ap, wchar_t);
+	c = va_arg(ap, wint_t);
+	if (!(size = ft_wclen(c)))
+		return (-1);
 	if (data->fg_minus)
 	{
-		len += ft_putwc(c);
+		len += write(1, &c, size);
 		len += ft_width(1, data);
 	}
 	else
 	{
 		len += ft_width(1, data);
-		len += ft_putwc(c);
+		len += write(1, &c, size);
 	}
 	return (len);
 }
 
 int		ft_formatbigs(t_prtf *data, va_list ap)
 {
-	wchar_t *s;
-	int len;
-	int size;
+	wchar_t	*s;
+	int		size;
+	char	*str;
+	char	*tmp;
 
-	len = -1;
-	size = 0;
+	size = -1;
 	s = va_arg(ap, wchar_t *);
-	while (s[++size]);
-	if (data->fg_minus)
+	if (!s)
+		return (ft_printstr(ft_strdup("(null)"), data));
+	if (!(str = ft_strnew(ft_wcslen(s))))
+		return (-1);
+	while (s[++size])
 	{
-		while (s)
-			len += ft_putwc(*s++);
-		len += ft_width(size, data);
+		tmp = ft_wctostr(s[size]);
+		ft_strcat(str, tmp);
+		free(tmp);
 	}
-	else 
-	{
-		len += ft_width(size, data);
-		while (s)
-			len += ft_putwc(*s++);
-	}
-	return (len);
+	return (ft_printstr(str, data));
 }

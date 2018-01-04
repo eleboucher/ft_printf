@@ -6,7 +6,7 @@
 #    By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/06 12:50:22 by elebouch          #+#    #+#              #
-#    Updated: 2017/12/23 14:10:45 by elebouch         ###   ########.fr        #
+#    Updated: 2018/01/04 16:33:10 by elebouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,7 +112,8 @@ LIBFT_SRCS= \
 UNICODE = \
 		  ft_wclen.c \
 		  ft_wcslen.c \
-		  ft_putwc.c
+		  ft_putwc.c  \
+		  ft_wctostr.c
 
 LIBFT_SRC = $(addprefix $(SRC_DIR)$(LIB_DIR), $(LIBFT_SRC))
 OBJ = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o)) $(addprefix $(OBJ_DIR)$(LIB_DIR), $(LIBFT_SRCS:.c=.o)) $(addprefix $(OBJ_DIR)unicode/, $(UNICODE:.c=.o))

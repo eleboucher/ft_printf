@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 19:14:15 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/23 14:27:43 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/04 16:33:38 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,4 +123,5 @@ int					ft_min(int a, int b);
 int					ft_wcslen(wchar_t *s);
 int					ft_wclen(wchar_t c);
 int					ft_putwc(wchar_t c);
+char				*ft_wctostr(wchar_t c);
 #endif

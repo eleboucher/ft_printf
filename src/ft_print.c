@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 11:20:58 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/23 14:17:41 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/04 17:19:55 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int		ft_formatchr(t_prtf *data, va_list ap)
 	int		len;
 
 	len = 0;
-	c = va_arg(ap, int);
 	if (data->format == 'C' || (data->format == 'c' && data->modifier == md_l))
 		return (ft_formatbigc(data, ap));
+	c = va_arg(ap, int);
 	if (data->fg_minus)
 	{
 		len += write(1, &c, 1);

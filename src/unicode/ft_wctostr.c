@@ -1,26 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_wclen.c                                         :+:      :+:    :+:   */
+/*   ft_wctostr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/23 13:56:59 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/04 17:05:56 by elebouch         ###   ########.fr       */
+/*   Created: 2018/01/03 00:13:12 by elebouch          #+#    #+#             */
+/*   Updated: 2018/01/04 16:35:19 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_wclen(wchar_t c)
+char *ft_wctostr(wchar_t c)
 {
+	char *str;
+
+	if (!(str = ft_strnew(ft_wclen(c))))
+		return (NULL);
 	if (c <= 0x7F)
-		return (1);
+		str[0] = c;
 	else if (c <= 0x7FF)
-		return (2);
+	{
+		str[0] = (c >> 12) | 0xE0;
+		str[1] = (c >> 6 & 0x3F) | 0x80;
+	}
 	else if (c <= 0xFFFF)
-		return (3);
+	{
+		str[0] = (c >> 12) | 0xE0;
+		str[1] = (c >> 6 & 0x3F) | 0x80;
+		str[2] = (c & 0x3F) | 0x80;
+	}
 	else if (c <= 0x10FFFF)
-		return (4);
-	return (0);
+	{
+		str[0] = (c >> 18) | 0xF0;
+		str[1] = (c >> 12 & 0x3F) | 0x80;
+		str[2] = (c >> 6 & 0x3F) | 0x80;
+		str[3] = (c & 0x3F) | 0x80;
+	}
+	return (str);
 }
