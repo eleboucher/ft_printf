@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 13:57:17 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/23 13:57:38 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/04 17:45:03 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ int	ft_wcslen(wchar_t *s)
 
 	size = 0;
 	while (s)
-		if ((sizec = ft_wclen(*s++)) == -1)
-			return (-1);
-		else
-			size += sizec;
+	{
+		if (!(sizec = ft_wclen(*s++)))
+			return (0);
+		size += sizec;
+	}
 	return (size);
 }
