@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 11:11:43 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/18 18:20:53 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/05 00:16:22 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int		ft_print_args(t_prtf *data, va_list ap)
 		return (ft_formatuint(data, ap));
 	else if (data->format == 'D' || data->format == 'O' || data->format == 'U')
 		return (ft_formatlong(data, ap));
+	else if (data->format == 'p')
+		return(ft_printpointer(data, ap));
 	ft_initialize(data);
 	return (ft_printstr(ft_ctos(data->format), data));
 }
