@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 13:31:26 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/05 15:59:16 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/05 22:26:44 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ int 	ft_formatbigc(t_prtf *data, va_list ap)
 	char	*str;
 
 	c = va_arg(ap, wchar_t);
-	if (!(len = ft_wclen(c)))
+	if (!(ft_wclen(c)))
 		return (-1);
 	len = 0;
 	if (!(str = ft_wctostr(c)))
 		return (-1);
 	if (data->fg_minus)
 	{
-		len += write(1, str, ft_strlen(str));
-		len += ft_width(1, data);
+		len += write(1, str, ft_wclen(c));
+		len += ft_width(ft_wclen(c), data);
 	}
 	else
 	{
-		len += ft_width(1, data);
-		len += write(1, str, ft_strlen(str));
+		len += ft_width(ft_wclen(c), data);
+		len += write(1, str, ft_wclen(c));
 	}
 	return (len);
 }
@@ -48,8 +48,12 @@ int		ft_formatbigs(t_prtf *data, va_list ap)
 	s = va_arg(ap, wchar_t *);
 	if (!s)
 		return (ft_printstr(ft_strdup("(null)"), data));
+	if (ft_wcslen(s) == -1)
+		return (-1);
 	if (!(str = ft_strnew(ft_wcslen(s))))
 		return (-1);
+	data->fg_space = 0;
+	data->fg_plus = 0;
 	while (s[++size])
 	{
 		tmp = ft_wctostr(s[size]);

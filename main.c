@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 13:42:34 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/05 16:02:57 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/05 23:04:19 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,5 @@
 #include <locale.h>
 int	main(void)
 {
-	int i = 42;
-	char *str = "coucou";
-	setlocale(LC_ALL, "");
-	ft_printf("%C", 0);
-	printf("%C", 0);
+	ft_printf("%s %C %d %p %x %% %S", "bonjour ", L'該', 42, &free, 42, L"لحم خنزير");
 }
