@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 13:31:26 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/04 23:53:30 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/05 15:59:16 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ int 	ft_formatbigc(t_prtf *data, va_list ap)
 	int		len;
 	char	*str;
 
-	len = 0;
 	c = va_arg(ap, wchar_t);
+	if (!(len = ft_wclen(c)))
+		return (-1);
+	len = 0;
 	if (!(str = ft_wctostr(c)))
 		return (-1);
 	if (data->fg_minus)

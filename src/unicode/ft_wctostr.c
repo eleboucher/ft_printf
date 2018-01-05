@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 00:13:12 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/04 23:44:13 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/05 15:52:38 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ char *ft_wctostr(wchar_t c)
 		str[0] = (unsigned char)c;
 	else if (c <= 0x7FF && MB_CUR_MAX >= 2) 
 	{
-		str[0] = (c >> 12) | 0xE0;
-		str[1] = (c >> 6 & 0x3F) | 0x80;
+		str[0] = (c >> 6) | 0xC0;
+		str[1] = (c & 0x3F) | 0x80;
 	}
 	else if (c <= 0xFFFF && MB_CUR_MAX >= 3)
 	{

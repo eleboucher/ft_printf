@@ -6,22 +6,18 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 13:42:34 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/04 17:46:14 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/05 16:02:57 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
-
+#include <locale.h>
 int	main(void)
 {
 	int i = 42;
 	char *str = "coucou";
-	wchar_t	s[4];
-	s[0] = 0x53;
-	s[1] = 0x3abc;
-	s[2] = 0x81000;
-	s[3] = '\0';
-	ft_printf("%S", s);
-	printf("%S", s);
+	setlocale(LC_ALL, "");
+	ft_printf("%C", 0);
+	printf("%C", 0);
 }
