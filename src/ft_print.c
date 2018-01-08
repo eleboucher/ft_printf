@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 11:20:58 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/04 17:19:55 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/08 18:14:59 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,10 @@ int		ft_formatuint(t_prtf *data, va_list ap)
 
 int		ft_formatlong(t_prtf *data, va_list ap)
 {
-	long long i;
+	long long int i;
+	unsigned long long ui;
 
+	ui = 0;
 	if (data->format == 'D')
 	{
 		i = va_arg(ap, long int);
@@ -122,7 +124,8 @@ int		ft_formatlong(t_prtf *data, va_list ap)
 		}
 		return (ft_printstr(ft_lltoa_base(i, 10), data));
 	}
-	i = (unsigned long int)va_arg(ap, long int);
+	i = 0;
+	ui = (unsigned long int)va_arg(ap, long int);
 	data->fg_space = 0;
 	data->fg_plus = 0;
 	if (i < 0)
@@ -131,6 +134,6 @@ int		ft_formatlong(t_prtf *data, va_list ap)
 		i *= -1;
 	}
 	if (data->format == 'O')
-		return (ft_printstr(ft_lltoa_base(i, 8), data));
-	return (ft_printstr(ft_lltoa_base(i, 10), data));
+		return (ft_printstr(ft_lltoa_base(ui, 8), data));
+	return (ft_printstr(ft_lltoa_base(ui, 10), data));
 }

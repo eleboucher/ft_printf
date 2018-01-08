@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 10:36:35 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/08 11:43:50 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/08 18:24:47 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_precision(char *str, t_prtf *data)
 		s = ft_strnew(0);
 		return (s);
 	}
-	if (data->format == 's')
+	if (data->format == 's' || data->format == 'S')
 	{
 		s = ft_strsub(str, 0, data->precision);
 		return (s);
