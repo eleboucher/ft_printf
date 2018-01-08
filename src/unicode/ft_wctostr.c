@@ -6,13 +6,13 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 00:13:12 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/05 15:52:38 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/08 11:46:43 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_wctostr(wchar_t c)
+char	*ft_wctostr(wchar_t c)
 {
 	char *str;
 
@@ -20,7 +20,7 @@ char *ft_wctostr(wchar_t c)
 		return (NULL);
 	if ((c <= 0x7F && MB_CUR_MAX >= 1) || (c <= 0xFF && MB_CUR_MAX == 1))
 		str[0] = (unsigned char)c;
-	else if (c <= 0x7FF && MB_CUR_MAX >= 2) 
+	else if (c <= 0x7FF && MB_CUR_MAX >= 2)
 	{
 		str[0] = (c >> 6) | 0xC0;
 		str[1] = (c & 0x3F) | 0x80;

@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 10:36:35 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/19 11:35:44 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/08 11:43:50 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int		ft_width(size_t len, t_prtf *data)
 	char	*pad;
 
 	size = ft_max(data->width, len) - len;
-	if (!size)
-		return (0);
 	size = ft_getwidthsize(size, data);
+	if (size <= 0)
+		return (0);
 	pad = ft_strnew(size);
 	if (data->fg_zero && !data->fg_minus && data->precision == -1)
 	{
