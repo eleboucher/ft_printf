@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 10:36:35 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/10 12:15:16 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/10 14:19:14 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,11 @@ int		ft_prefix(char *str, t_prtf *data)
 
 int		ft_getwidthsize(int len, t_prtf *data)
 {
-	if ((data->format == 'o' || data->format == 'O') && data->fg_hashtag &&
-			data->precision > -1)
+	if ((data->format == 'o' || data->format == 'O') && data->fg_hashtag)
 		len -= 1;
-	if (data->format == 'p' || (data->format == 'x' && data->fg_hashtag && 
-		 data->precision > 0))
+	if (data->format == 'p' || (data->format == 'x' && data->fg_hashtag))
 		len -= 2;
-	if (data->format == 'X' && data->fg_hashtag && data->precision > 0)
+	if (data->format == 'X' && data->fg_hashtag)
 		len -= 2;
 	if (data->neg || (!data->neg && data->fg_plus) || (!data->neg &&
 				!data->fg_plus && data->fg_space && data->format != '%'))
