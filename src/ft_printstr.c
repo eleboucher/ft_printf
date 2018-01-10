@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 10:36:35 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/10 14:19:14 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/10 15:09:37 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ int		ft_printstr(char *str, t_prtf *data)
 	if (data->fg_zero && !data->fg_minus)
 	{
 		size += ft_prefix(str, data);
-		size += ft_width(ft_strlen(str), data);
+		size += ft_width(ft_strlen(str), data, str);
 		size += write(1, str, ft_strlen(str));
 	}
 	else if (data->fg_minus)
 	{
 		size += ft_prefix(str, data);
 		size += write(1, str, ft_strlen(str));
-		size += ft_width(ft_strlen(str), data);
+		size += ft_width(ft_strlen(str), data, str);
 	}
 	else
 	{
-		size += ft_width(ft_strlen(str), data);
+		size += ft_width(ft_strlen(str), data, str);
 		size += ft_prefix(str, data);
 		size += write(1, str, ft_strlen(str));
 	}
@@ -66,13 +66,13 @@ char	*ft_precision(char *str, t_prtf *data)
 	return (s);
 }
 
-int		ft_width(size_t len, t_prtf *data)
+int		ft_width(size_t len, t_prtf *data, char *str)
 {
 	int		size;
 	char	*pad;
 
 	size = ft_max(data->width, len) - len;
-	size = ft_getwidthsize(size, data);
+	size = ft_getwidthsize(size, data, str);
 	if (size <= 0)
 		return (0);
 	pad = ft_strnew(size);
@@ -101,7 +101,7 @@ int		ft_prefix(char *str, t_prtf *data)
 	if (data->format == 'p' || (data->format == 'x' && data->fg_hashtag &&
 				((*str && str[0] != '0') || data->precision > 0)))
 		size += write(1, "0x", 2);
-	if (data->format == 'X' && data->fg_hashtag && 
+	if (data->format == 'X' && data->fg_hashtag &&
 			((*str && str[0] != '0') || data->precision > 0))
 		size += write(1, "0X", 2);
 	if (data->neg)
@@ -114,13 +114,16 @@ int		ft_prefix(char *str, t_prtf *data)
 	return (size);
 }
 
-int		ft_getwidthsize(int len, t_prtf *data)
+int		ft_getwidthsize(int len, t_prtf *data, char *str)
 {
-	if ((data->format == 'o' || data->format == 'O') && data->fg_hashtag)
+	if ((data->format == 'o' || data->format == 'O') && data->fg_hashtag &&
+			((str[0] != '0' && *str) || data->precision >= 0))
 		len -= 1;
-	if (data->format == 'p' || (data->format == 'x' && data->fg_hashtag))
+	if (data->format == 'p' || (data->format == 'x' && data->fg_hashtag &&
+			((str[0] != '0' && *str) || data->precision >= 0)))
 		len -= 2;
-	if (data->format == 'X' && data->fg_hashtag)
+	if (data->format == 'X' && data->fg_hashtag &&
+			((str[0] != '0' && *str) || data->precision >= 0))
 		len -= 2;
 	if (data->neg || (!data->neg && data->fg_plus) || (!data->neg &&
 				!data->fg_plus && data->fg_space && data->format != '%'))

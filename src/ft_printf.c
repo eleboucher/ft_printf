@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 10:48:35 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/10 10:33:39 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/10 15:08:19 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_print(const char *format, va_list ap)
 {
 	int		len;
 	int		tmp;
-	char    *fmt;
+	char	*fmt;
 
 	len = 0;
 	fmt = (char *)format;

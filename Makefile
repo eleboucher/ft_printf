@@ -6,7 +6,7 @@
 #    By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/06 12:50:22 by elebouch          #+#    #+#              #
-#    Updated: 2018/01/08 18:45:58 by elebouch         ###   ########.fr        #
+#    Updated: 2018/01/10 15:16:37 by elebouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIB_DIR = libft/
 SRCS =\
 	 ft_printf.c \
 	 ft_args.c \
-	 ft_print.c \
+	 ft_format.c \
 	 ft_printstr.c \
      ft_getflags.c \
 	 ft_printunicode.c \

@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 11:04:13 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/05 00:15:24 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/10 14:44:08 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int				ft_formatuint(t_prtf *data, va_list ap);
 int				ft_formatlong(t_prtf *data, va_list ap);
 int				ft_printstr(char *str, t_prtf *data);
 char			*ft_precision(char *s, t_prtf *data);
-int				ft_width(size_t len, t_prtf *data);
-int				ft_getwidthsize(int len, t_prtf *data);
+int				ft_width(size_t len, t_prtf *data, char *str);
+int				ft_getwidthsize(int len, t_prtf *data, char *str);
 int				ft_prefix(char *str, t_prtf *data);
 void			ft_initialize(t_prtf *data);
 int				ft_formatbigc(t_prtf *data, va_list ap);

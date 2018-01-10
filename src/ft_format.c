@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   ft_format.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/07 11:20:58 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/10 11:58:25 by elebouch         ###   ########.fr       */
+/*   Created: 2018/01/10 15:08:36 by elebouch          #+#    #+#             */
+/*   Updated: 2018/01/10 15:09:13 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int		ft_formatchr(t_prtf *data, va_list ap)
 	if (data->fg_minus)
 	{
 		len += write(1, &c, 1);
-		len += ft_width(1, data);
+		len += ft_width(1, data, ft_ctos(c));
 	}
 	else
 	{
-		len += ft_width(1, data);
+		len += ft_width(1, data, ft_ctos(c));
 		len += write(1, &c, 1);
 	}
 	return (len);
@@ -110,8 +110,8 @@ int		ft_formatuint(t_prtf *data, va_list ap)
 
 int		ft_formatlong(t_prtf *data, va_list ap)
 {
-	long long int i;
-	unsigned long long ui;
+	long long int		i;
+	unsigned long long	ui;
 
 	ui = 0;
 	if (data->format == 'D')
@@ -128,11 +128,6 @@ int		ft_formatlong(t_prtf *data, va_list ap)
 	ui = (unsigned long int)va_arg(ap, long int);
 	data->fg_space = 0;
 	data->fg_plus = 0;
-	if (i < 0)
-	{
-		data->neg = 1;
-		i *= -1;
-	}
 	if (data->format == 'O')
 		return (ft_printstr(ft_lltoa_base(ui, 8), data));
 	return (ft_printstr(ft_lltoa_base(ui, 10), data));

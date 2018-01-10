@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 19:14:15 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/04 16:33:38 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/10 15:11:26 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <wchar.h>
+
 typedef struct		s_list
 {
 	void			*content;
