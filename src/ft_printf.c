@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 10:48:35 by elebouch          #+#    #+#             */
-/*   Updated: 2017/12/12 13:54:53 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/10 10:33:39 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,23 @@ int		ft_printf(const char *format, ...)
 int		ft_print(const char *format, va_list ap)
 {
 	int		len;
-	char	*fmt;
-	char	*start;
+	int		tmp;
+	char    *fmt;
 
-	fmt = (char *)format;
-	start = (char *)format;
 	len = 0;
+	fmt = (char *)format;
 	while (*fmt)
 	{
+		while (*fmt && *fmt != '%')
+		{
+			len += write(1, fmt++, 1);
+		}
 		if (*fmt == '%')
 		{
-			ft_putnstr(start, fmt - start);
-			len += ft_proc_arg(&fmt, ap);
-			start = fmt;
-		}
-		else if (*fmt)
-		{
-			fmt++;
-			len++;
+			if ((tmp = ft_proc_arg(&fmt, ap)) == -1)
+				return (-1);
+			len += tmp;
 		}
 	}
-	ft_putnstr(start, fmt - start);
 	return (len);
 }
