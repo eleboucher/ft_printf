@@ -6,13 +6,13 @@
 #    By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/06 12:50:22 by elebouch          #+#    #+#              #
-#    Updated: 2018/01/10 15:16:37 by elebouch         ###   ########.fr        #
+#    Updated: 2018/01/11 10:28:06 by elebouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 CC = clang
-CFLAGS = -g -Wall -Werror -Wextra -I includes/ -I libft/includes
+CFLAGS =  -Wall -Werror -Wextra -I includes/
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
