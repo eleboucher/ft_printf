@@ -6,7 +6,7 @@
 /*   By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 10:36:35 by elebouch          #+#    #+#             */
-/*   Updated: 2018/01/10 15:09:37 by elebouch         ###   ########.fr       */
+/*   Updated: 2018/01/15 10:54:11 by elebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_precision(char *str, t_prtf *data)
 	char	*s;
 
 	len = ft_max(data->precision, ft_strlen(str)) - ft_strlen(str);
-	if (data->format == 'o' && data->fg_hashtag && data->precision > 0)
+	if (data->format == 'o' && data->fg_hashtag && len > 0)
 		len -= 1;
 	if (len <= 0 && str[0] == '0')
 	{
