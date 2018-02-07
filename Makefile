@@ -6,7 +6,7 @@
 #    By: elebouch <elebouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/06 12:50:22 by elebouch          #+#    #+#              #
-#    Updated: 2018/01/11 10:28:06 by elebouch         ###   ########.fr        #
+#    Updated: 2018/02/07 16:03:37 by elebouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC_DIR = ./src/
 OBJ_DIR = ./obj/
 LIB_DIR = libft/
 
-SRCS =\
+SRCS = \
 	 ft_printf.c \
 	 ft_args.c \
 	 ft_format.c \
@@ -115,6 +115,9 @@ UNICODE = \
 		  ft_wcslen.c \
 		  ft_putwc.c  \
 		  ft_wctostr.c
+HEADER = \
+		 includes/ft_printf.h \
+		 includes/libft.h
 
 LIBFT_SRC = $(addprefix $(SRC_DIR)$(LIB_DIR), $(LIBFT_SRC))
 OBJ = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o)) $(addprefix $(OBJ_DIR)$(LIB_DIR), $(LIBFT_SRCS:.c=.o)) $(addprefix $(OBJ_DIR)unicode/, $(UNICODE:.c=.o))
@@ -135,7 +138,7 @@ re:
 	@make fclean 
 	@make
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)/libft
 	@mkdir -p $(OBJ_DIR)/unicode
